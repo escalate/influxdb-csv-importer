@@ -1,4 +1,6 @@
 # influxdb-csv-importer
+![Build Status](https://travis-ci.org/escalate/influxdb-csv-importer.svg?branch=master)
+
 Imports CSV files into InfluxDB
 
 ## Dependencies
