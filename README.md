@@ -19,12 +19,12 @@ Install needed requirements via pip
 
 #### Production
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 #### Development
 ```
-pip install -r dev-requirements.txt
+$ pip install -r dev-requirements.txt
 ```
 
 ### Run
@@ -72,6 +72,12 @@ Options:
   --write-data                    Write data into InfluxDB
   --verbose                       Enable verbose logging output
   --help                          Show this message and exit.
+```
+
+## Helper
+Small bash script to run python script within virtualenv
+```
+$ ./usevenv.sh csvimporter.py
 ```
 
 ## Other Projects
