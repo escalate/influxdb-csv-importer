@@ -63,7 +63,7 @@ Options:
                                   values e.g. de_DE.UTF-8
   --date-filter TEXT              Select only rows with a specific date
                                   in the timestamp column for import
-                                  e.g. 2016-01-01
+                                  e.g. 2020-01-01
   --column-ignorelist TEXT        Ignore a list of columns for import
                                   e.g. col1,col2,col3
   --convert-int-to-float          Convert integer values to float

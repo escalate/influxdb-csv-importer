@@ -160,7 +160,7 @@ class CsvImporter(object):
         return j
 
     @staticmethod
-    def match_date(epoch_timestamp, date_str='2016-01-01'):
+    def match_date(epoch_timestamp, date_str='2020-01-01'):
         """Returns true if timestamp is inside the range of date
         Returns false if timestamp is outside the range of date"""
         utc_timestamp = datetime.utcfromtimestamp(int(epoch_timestamp))
@@ -301,7 +301,7 @@ class CsvImporter(object):
               e.g. de_DE.UTF-8')
 @click.option('--date-filter',
               help='Select only rows with a specific date \
-              in the timestamp column for import e.g. 2016-01-01')
+              in the timestamp column for import e.g. 2020-01-01')
 @click.option('--column-ignorelist',
               help='Ignore a list of columns for import \
               e.g. col1,col2,col3')
