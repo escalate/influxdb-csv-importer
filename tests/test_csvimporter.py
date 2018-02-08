@@ -7,6 +7,11 @@ from datetime import datetime
 from pytz import timezone
 from csvimporter import CsvImporter
 
+import os
+from tempfile import NamedTemporaryFile
+
+fixtures_dir = os.path.abspath('tests/fixtures')
+
 
 @pytest.mark.parametrize('epoch_timestamp,date_str', [
     # 2016-12-01T00:00:00+00:00
@@ -67,3 +72,111 @@ def test_convert_into_utc_timestamp(date_str, fmt, tz, expected):
 ])
 def test_convert_int_to_float(data, expected):
     assert CsvImporter.convert_int_to_float(data) == expected
+
+
+class TestClass(object):
+    @classmethod
+    def setup_class(cls):
+        temp_file = NamedTemporaryFile()
+        cls.actual = CsvImporter(temp_file.name)
+
+    @classmethod
+    def teardown_class(cls):
+        del cls.actual
+
+    def test_set_server(self):
+        expected = '192.168.1.2'
+        self.actual.set_server(expected)
+        assert self.actual.cfg_server == expected
+
+    def test_set_port(self):
+        expected = '8080'
+        self.actual.set_port(expected)
+        assert self.actual.cfg_port == expected
+
+    def test_set_user(self):
+        expected = 'player1'
+        self.actual.set_user(expected)
+        assert self.actual.cfg_user == expected
+
+    def test_set_password(self):
+        expected = 'secret'
+        self.actual.set_password(expected)
+        assert self.actual.cfg_password == expected
+
+    def test_set_database(self):
+        expected = 'mydb'
+        self.actual.set_database(expected)
+        assert self.actual.cfg_database == expected
+
+    @pytest.mark.parametrize('measurement,expected', [
+        ('lowercase', 'lowercase'),
+        ('UPPERCASE', 'uppercase'),
+        ('CamelCase', 'camelcase'),
+        ('Mi-nus', 'mi_nus'),
+        ('Under_Score', 'under_score'),
+        ('Dots.Dots.Dots', 'dots_dots_dots'),
+        ('W h i t e Spaces', 'w_h_i_t_e_spaces')
+    ])
+    def test_set_measurement(self, measurement, expected):
+        self.actual.set_measurement(expected)
+        assert self.actual.cfg_measurement == expected
+
+    def test_set_timestamp_column(self):
+        expected = 'date_col1'
+        self.actual.set_timestamp_column(expected)
+        assert self.actual.cfg_timestamp_column == expected
+
+    @pytest.mark.parametrize('fmt', [
+        'epoch',
+        'datetime'
+    ])
+    def test_set_timestamp_format(self, fmt):
+        expected = fmt
+        self.actual.set_timestamp_format(expected)
+        assert self.actual.cfg_timestamp_format == expected
+
+    @pytest.mark.parametrize('tz', [
+        'UTC',
+        'Europe/Berlin',
+        'US/Eastern'
+    ])
+    def test_set_timestamp_timezone(self, tz):
+        expected = tz
+        self.actual.set_timestamp_timezone(expected)
+        assert self.actual.cfg_timestamp_timezone == expected
+
+    @pytest.mark.parametrize('lc', [
+        'de_DE.UTF-8',
+        'en_GB.UTF-8'
+    ])
+    def test_set_locale(self, lc):
+        expected = lc
+        self.actual.set_locale(expected)
+        assert self.actual.cfg_locale == expected
+
+    def test_set_date_filter(self):
+        expected = '2020-01-01'
+        self.actual.set_date_filter(expected)
+        assert self.actual.cfg_date_filter == expected
+
+    @pytest.mark.parametrize('columns,expected', [
+        ('col1,col2,col3', ['col1', 'col2', 'col3']),
+        ('col1, col2, col3', ['col1', 'col2', 'col3']),
+        ('col1 , col2 , col3 ', ['col1', 'col2', 'col3']),
+        ('col1 , ', ['col1']),
+        ('col1 ,', ['col1']),
+        ('col1', ['col1'])
+    ])
+    def test_set_column_ignorelist(self, columns, expected):
+        self.actual.set_column_ignorelist(columns)
+        assert self.actual.cfg_column_ignorelist == expected
+
+    @pytest.mark.parametrize('toggle', [
+        True,
+        False
+    ])
+    def test_set_convert_int_to_float(self, toggle):
+        expected = toggle
+        self.actual.set_convert_int_to_float(expected)
+        assert self.actual.cfg_convert_int_to_float == expected
