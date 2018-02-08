@@ -1,4 +1,7 @@
 language: python
 python:
   - "3.6"
-script: tox
+install:
+  - pip install -r dev-requirements.txt
+script:
+  - tox
