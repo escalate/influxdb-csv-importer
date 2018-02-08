@@ -56,32 +56,32 @@ class CsvImporter(object):
     def set_server(self, server):
         """Sets the InfluxDB server address"""
         self.cfg_server = server
-        logging.debug('InfluxDB sever address is set to "'
-                      + self.cfg_server + '"')
+        logging.debug('InfluxDB sever address is set to "' +
+                      self.cfg_server + '"')
 
     def set_port(self, port):
         """Sets the InfluxDB server port"""
         self.cfg_port = port
-        logging.debug('InfluxDB sever port is set to "'
-                      + self.cfg_port + '"')
+        logging.debug('InfluxDB sever port is set to "' +
+                      self.cfg_port + '"')
 
     def set_user(self, user):
         """Sets the InfluxDB user for authentication"""
         self.cfg_user = user
-        logging.debug('InfluxDB user is set to "'
-                      + self.cfg_user + '"')
+        logging.debug('InfluxDB user is set to "' +
+                      self.cfg_user + '"')
 
     def set_password(self, password):
         """Sets the InfluxDB password for authentication"""
         self.cfg_password = password
-        logging.debug('InfluxDB password is set to "'
-                      + self.cfg_password + '"')
+        logging.debug('InfluxDB password is set to "' +
+                      self.cfg_password + '"')
 
     def set_database(self, database):
         """Sets the InfluxDB database"""
         self.cfg_database = database
-        logging.debug('InfluxDB database is set to "'
-                      + self.cfg_database + '"')
+        logging.debug('InfluxDB database is set to "' +
+                      self.cfg_database + '"')
 
     def set_measurement(self, measurement):
         """Sets the InfluxDB measurement"""
@@ -91,26 +91,26 @@ class CsvImporter(object):
             .replace('.', '_') \
             .replace('(', '') \
             .replace(')', '')
-        logging.debug('InfluxDB measurement is set to "'
-                      + self.cfg_measurement + '"')
+        logging.debug('InfluxDB measurement is set to "' +
+                      self.cfg_measurement + '"')
 
     def set_timestamp_column(self, column):
         """Sets the column to use as timestamp"""
         self.cfg_timestamp_column = column
-        logging.debug('Timestamp column is set to "'
-                      + self.cfg_timestamp_column + '"')
+        logging.debug('Timestamp column is set to "' +
+                      self.cfg_timestamp_column + '"')
 
     def set_timestamp_format(self, fmt):
         """Sets the format of the timestamp column"""
         self.cfg_timestamp_format = fmt
-        logging.debug('Timestamp format is set to "'
-                      + self.cfg_timestamp_format + '"')
+        logging.debug('Timestamp format is set to "' +
+                      self.cfg_timestamp_format + '"')
 
     def set_timestamp_timezone(self, tz):
         """Sets the timezone of the timestamp column"""
         self.cfg_timestamp_timezone = tz
-        logging.debug('Timestamp timezone is set to "'
-                      + self.cfg_timestamp_timezone + '"')
+        logging.debug('Timestamp timezone is set to "' +
+                      self.cfg_timestamp_timezone + '"')
 
     def set_locale(self, lc):
         """Sets the locale for ctype, numeric and monetary values"""
@@ -127,22 +127,22 @@ class CsvImporter(object):
     def set_date_filter(self, date):
         """Sets the date for rows to filter"""
         self.cfg_date_filter = date
-        logging.debug('Date filter is set to "'
-                      + self.cfg_date_filter + '"')
+        logging.debug('Date filter is set to "' +
+                      self.cfg_date_filter + '"')
 
     def set_column_ignorelist(self, columns):
         """Sets the list of columns to ignore"""
         columns = columns.split(',')
         columns = [x.strip(' ') for x in columns]
         self.cfg_column_ignorelist = columns
-        logging.debug('Column ignorelist is set to '
-                      + str(self.cfg_column_ignorelist))
+        logging.debug('Column ignorelist is set to ' +
+                      str(self.cfg_column_ignorelist))
 
     def set_convert_int_to_float(self, toggle):
         """Sets toggle for integer to float conversion"""
         self.cfg_convert_int_to_float = toggle
-        logging.debug('Toggle for int to float conversion is set to "'
-                      + str(self.cfg_convert_int_to_float) + '"')
+        logging.debug('Toggle for int to float conversion is set to "' +
+                      str(self.cfg_convert_int_to_float) + '"')
 
     def print_columns(self):
         """Returns all column names in pretty json format"""
