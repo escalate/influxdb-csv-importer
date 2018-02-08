@@ -38,8 +38,8 @@ class CsvImporter(object):
                 self.csv_rows.append(row.copy())
 
         # Declare variables
-        self.cfg_server = 'localhost'
-        self.cfg_port = '8086'
+        self.cfg_server = None
+        self.cfg_port = None
         self.cfg_user = None
         self.cfg_password = None
         self.cfg_database = None
@@ -270,8 +270,10 @@ class CsvImporter(object):
 @click.option('--delimiter',
               help='Delimiter of .csv file (Default: ,)')
 @click.option('--server',
+              default='localhost',
               help='Server address (Default: localhost)')
 @click.option('--port',
+              default='8086',
               help='Server port (Default: 8086)')
 @click.option('--user',
               help='User for authentication')
