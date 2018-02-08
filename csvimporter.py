@@ -21,13 +21,10 @@ class CsvImporter(object):
     """Class to read .csv files
     and write the values to InfluxDB"""
 
-    def __init__(self, csv_filename, delimiter=None):
+    def __init__(self, csv_filename, delimiter=','):
         """Constructor"""
-        if delimiter is None:
-            delimiter = ','
-        logging.debug('Delimter is set to "' + delimiter + '"')
-
-        logging.debug('Read .csv file ' + csv_filename)
+        logging.debug('CSV filename is set to "' + csv_filename + '"')
+        logging.debug('CSV delimter is set to "' + delimiter + '"')
         self.csv_rows = []
         with open(csv_filename, 'r') as csv_file:
             csv_dict_reader = csv.DictReader(
@@ -268,6 +265,7 @@ class CsvImporter(object):
 @click.argument('csvfile',
                 type=click.Path(exists=True))
 @click.option('--delimiter',
+              default=',',
               help='Delimiter of .csv file (Default: ,)')
 @click.option('--server',
               default='localhost',
