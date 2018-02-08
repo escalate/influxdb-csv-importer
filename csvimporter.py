@@ -45,8 +45,8 @@ class CsvImporter(object):
         self.cfg_database = None
         self.cfg_measurement = None
         self.cfg_timestamp_column = None
-        self.cfg_timestamp_format = 'epoch'
-        self.cfg_timestamp_timezone = 'UTC'
+        self.cfg_timestamp_format = None
+        self.cfg_timestamp_timezone = None
         self.cfg_locale = None
         self.cfg_date_filter = None
         self.cfg_column_ignorelist = None
