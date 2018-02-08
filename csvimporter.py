@@ -4,7 +4,6 @@
 """Commandline interface
 to control CsvImporter class"""
 
-from __future__ import print_function
 import csv
 import json
 from datetime import datetime
