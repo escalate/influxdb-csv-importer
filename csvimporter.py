@@ -114,13 +114,14 @@ class CsvImporter(object):
 
     def set_locale(self, lc):
         """Sets the locale for ctype, numeric and monetary values"""
-        locale.setlocale(locale.LC_CTYPE, lc)
+        self.cfg_locale = lc
+        locale.setlocale(locale.LC_CTYPE, self.cfg_locale)
         logging.debug('Locale for ctype values is set to "' +
                       str(locale.getlocale(locale.LC_CTYPE)) + '"')
-        locale.setlocale(locale.LC_NUMERIC, lc)
+        locale.setlocale(locale.LC_NUMERIC, self.cfg_locale)
         logging.debug('Locale for numeric values is set to "' +
                       str(locale.getlocale(locale.LC_NUMERIC)) + '"')
-        locale.setlocale(locale.LC_MONETARY, lc)
+        locale.setlocale(locale.LC_MONETARY, self.cfg_locale)
         logging.debug('Locale for monetary values is set to "' +
                       str(locale.getlocale(locale.LC_MONETARY)) + '"')
 
