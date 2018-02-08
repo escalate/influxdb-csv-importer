@@ -10,9 +10,9 @@ Import CSV files into InfluxDB
 * [dateutil](https://pypi.python.org/pypi/python-dateutil)
 
 ## Installation
-Tested with Python 3.4.3 on Ubuntu 14.04
+Tested with Python 3.6.x on Ubuntu 16.04
 
-If you encounter issues with other 3.x versions of Python, please open a github issue.
+If you encounter issues with 3.6.x minor versions of Python, please open a github issue.
 
 ### Requirements
 Install needed requirements via pip
