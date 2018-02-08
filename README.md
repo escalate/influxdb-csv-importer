@@ -12,7 +12,7 @@ Import CSV files into InfluxDB
 ## Installation
 Tested with Python 3.6.x on Ubuntu 16.04
 
-If you encounter issues with 3.6.x minor versions of Python, please open a github issue.
+If you encounter issues with 3.6.x patch versions of Python, please open a Github issue.
 
 ### Requirements
 Install needed requirements via pip
