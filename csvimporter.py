@@ -135,6 +135,7 @@ class CsvImporter(object):
         """Sets the list of columns to ignore"""
         columns = columns.split(',')
         columns = [x.strip(' ') for x in columns]
+        columns = [x for x in columns if x]
         self.cfg_column_ignorelist = columns
         logging.debug('Column ignorelist is set to ' +
                       str(self.cfg_column_ignorelist))
