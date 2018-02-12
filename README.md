@@ -74,6 +74,36 @@ Options:
   --help                          Show this message and exit.
 ```
 
+## Docker
+Build Docker image
+```
+$ docker build \
+    --tag=csvimporter \
+    .
+```
+
+Run Docker container from built image to print help
+```
+$ docker run \
+    csvimporter
+
+Usage: csvimporter.py [OPTIONS] CSVFILE
+
+  Commandline interface for CsvImporter
+
+Options:
+...
+```
+
+Run Docker container with additional arguments
+```
+$ docker run \
+    csvimporter \
+    file.csv \
+    --print-columns \
+    --verbose
+```
+
 ## Helper
 Small bash script to run python script within virtualenv
 ```
