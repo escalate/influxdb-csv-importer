@@ -3,12 +3,6 @@
 
 Import CSV files into InfluxDB
 
-## Dependencies
-* [click](https://pypi.python.org/pypi/click)
-* [influxdb](https://pypi.python.org/pypi/influxdb)
-* [python-dateutil](https://pypi.python.org/pypi/python-dateutil)
-* [pytz](https://pypi.python.org/pypi/pytz)
-
 ## Installation
 Tested with Python 3.6.x on Ubuntu 16.04
 
@@ -103,6 +97,12 @@ $ docker run \
     --print-columns \
     --verbose
 ```
+
+## Dependencies
+* [click](https://pypi.python.org/pypi/click)
+* [influxdb](https://pypi.python.org/pypi/influxdb)
+* [python-dateutil](https://pypi.python.org/pypi/python-dateutil)
+* [pytz](https://pypi.python.org/pypi/pytz)
 
 ## Helper
 Small bash script to run python script within virtualenv
