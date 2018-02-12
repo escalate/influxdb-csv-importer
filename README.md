@@ -89,7 +89,7 @@ Options:
 ...
 ```
 
-Run Docker container with additional arguments
+Run Docker container from built image with additional arguments
 ```
 $ docker run \
     csvimporter \
