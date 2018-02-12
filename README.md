@@ -54,7 +54,7 @@ Options:
                                   the current timestamp is used
   --timestamp-format [epoch|datetime]
                                   Format of the timestamp column
-                                  used to parse all timestamp               
+                                  used to parse all timestamp
                                   (Default: epoch timestamp);
                                   epoch = epoch / unix timestamp
                                   datetime = normal date and/or time notation
