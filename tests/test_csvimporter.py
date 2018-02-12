@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+import unittest
 
 from datetime import datetime
 from pytz import timezone
@@ -180,3 +181,20 @@ class TestClass(object):
         expected = toggle
         self.actual.set_convert_int_to_float(expected)
         assert self.actual.cfg_convert_int_to_float == expected
+
+
+class OutputTestCase(unittest.TestCase):
+    def setUp(self):
+        simple_csv_file = '{fixtures_dir}/simple.csv'.format(fixtures_dir=fixtures_dir)
+        self.actual = CsvImporter(simple_csv_file)
+
+    def tearDown(self):
+        del self.actual
+
+    def test_print_columns(self):
+        expected = '[\n    "col1",\n    "col2"\n]'
+        assert self.actual.print_columns() == expected
+
+    def test_print_rows(self):
+        expected = '[\n    {\n        "col1": "a",\n        "col2": "b"\n    },\n    {\n        "col1": "c",\n        "col2": "d"\n    }\n]'
+        assert self.actual.print_rows() == expected
