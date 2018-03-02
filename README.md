@@ -33,7 +33,7 @@ $ ./csvimporter.py --help
 
 Usage: csvimporter.py [OPTIONS] CSVFILE
 
-  Commandline interface for CsvImporter
+  Commandline interface for InfluxDB / CSV Importer
 
 Options:
   --delimiter TEXT                Delimiter of .csv file (Default: ,)
@@ -114,3 +114,6 @@ $ ./usevenv.sh csvimporter.py
 * A commandline tool to convert a CSV file into InfluxDB-compatible JSON written in Ruby [spuder/csv2influxdb](https://github.com/spuder/csv2influxdb)
 * A commandline tool to import CSV files into InfluxDB written in GO [jpillora/csv-to-influxdb](https://github.com/jpillora/csv-to-influxdb)
 * Another commandline tool to import CSV files into InfluxDB but written in NodeJS [corpglory/csv2influx](https://github.com/CorpGlory/csv2influx)
+
+## License
+MIT
