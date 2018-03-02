@@ -323,7 +323,7 @@ class CsvImporter(object):
               is_flag=True,
               help='Enable verbose logging output')
 def cli(*args, **kwargs):
-    """Commandline interface for CsvImporter"""
+    """Commandline interface for InfluxDB / CSV Importer"""
 
     # Configure logging
     log_format = '%(levelname)s: %(message)s'
