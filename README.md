@@ -1,4 +1,4 @@
-# influxdb-csv-importer
+# InfluxDB CSV Importer
 [![Build Status](https://travis-ci.org/escalate/influxdb-csv-importer.svg?branch=master)](https://travis-ci.org/escalate/influxdb-csv-importer)
 
 Import CSV files into InfluxDB
