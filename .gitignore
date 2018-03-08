@@ -43,3 +43,6 @@ coverage.xml
 # virtualenv
 venv/
 ENV/
+
+# IntelliJ IDEA
+.idea/
