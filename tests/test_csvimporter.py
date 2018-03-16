@@ -11,7 +11,7 @@ from csvimporter import CsvImporter
 import os
 from tempfile import NamedTemporaryFile
 
-fixtures_dir = os.path.abspath('tests/fixtures')
+FIXTURES_DIR = os.path.abspath('tests/fixtures')
 
 
 @pytest.mark.parametrize('epoch_timestamp,date_str', [
@@ -185,7 +185,7 @@ class TestClass(object):
 
 class OutputTestCase(unittest.TestCase):
     def setUp(self):
-        simple_csv_file = '{fixtures_dir}/simple.csv'.format(fixtures_dir=fixtures_dir)
+        simple_csv_file = '{fixtures_dir}/simple.csv'.format(fixtures_dir=FIXTURES_DIR)
         self.actual = CsvImporter(simple_csv_file)
 
     def tearDown(self):
