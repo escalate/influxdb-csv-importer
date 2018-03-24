@@ -275,7 +275,7 @@ class CsvImporter(object):
                                     tags[column] = row_copy[column]
                                     del row_copy[column]
                 else:
-                    tags=None
+                    tags = None
                 self.write_measurement(
                     self.cfg_measurement,
                     row_copy,
