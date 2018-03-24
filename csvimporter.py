@@ -96,7 +96,7 @@ class CsvImporter(object):
         tags_columns_orig = tags_columns
         self.cfg_tags_columns = tags_columns.split(',')
         logging.debug('Tags are set to "' +
-                tags_columns_orig + '"')
+                      tags_columns_orig + '"')
 
     def set_timestamp_column(self, column):
         """Sets the column to use as timestamp"""
@@ -264,18 +264,18 @@ class CsvImporter(object):
 
             if row_copy is not None:
                 if self.cfg_tags_columns is not None:
-                   tags = {}
-                   for column in self.cfg_tags_columns:
-                     if row_copy is not None:
-                        if column in row_copy:
-                           if column == '' or row_copy[column] == '':
-                              del row_copy[column]
-                              continue
-                           else:
-                              tags[column] = row_copy[column]
-                              del row_copy[column]
+                    tags = {}
+                    for column in self.cfg_tags_columns:
+                        if row_copy is not None:
+                            if column in row_copy:
+                                if column == '' or row_copy[column] == '':
+                                    del row_copy[column]
+                                    continue
+                                else:
+                                    tags[column] = row_copy[column]
+                                    del row_copy[column]
                 else:
-                   tags=None
+                    tags=None
                 self.write_measurement(
                     self.cfg_measurement,
                     row_copy,
