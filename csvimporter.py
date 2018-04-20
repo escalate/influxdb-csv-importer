@@ -81,12 +81,7 @@ class CsvImporter(object):
 
     def set_measurement(self, measurement):
         """Sets the InfluxDB measurement"""
-        self.cfg_measurement = measurement \
-            .lower() \
-            .replace(' ', '_') \
-            .replace('.', '_') \
-            .replace('(', '') \
-            .replace(')', '')
+        self.cfg_measurement = measurement
         logging.debug('InfluxDB measurement is set to "' +
                       self.cfg_measurement + '"')
 
