@@ -6,15 +6,14 @@ to control CsvImporter class"""
 
 import csv
 import json
-from datetime import datetime
-from datetime import timedelta
 import locale
 import logging
+from datetime import datetime, timedelta
 
+import click
+from dateutil.parser import parse
 from influxdb import InfluxDBClient
 from pytz import timezone
-from dateutil.parser import parse
-import click
 
 
 class CsvImporter(object):
