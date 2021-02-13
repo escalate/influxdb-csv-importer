@@ -1,10 +1,10 @@
 # InfluxDB CSV Importer
 [![Build Status](https://travis-ci.org/escalate/influxdb-csv-importer.svg?branch=master)](https://travis-ci.org/escalate/influxdb-csv-importer)
 
-Import CSV files into InfluxDB
+Import CSV files into InfluxDB v1.x
 
 ## Installation
-Tested with Python 3.6.x on Ubuntu 16.04
+Tested with Python 3.6.x on Ubuntu 18.04
 
 If you encounter issues with 3.6.x patch versions of Python, please open a Github issue.
 
