@@ -43,6 +43,8 @@ Options:
   --password TEXT                 Pasword for authentication
   --database TEXT                 Database name
   --measurement TEXT              Measurement name
+  --tags-columns TEXT             Columns that should be tags eg.
+                                  test,test2,test3
   --timestamp-column TEXT         Name of the column to use as timestamp;
                                   if option is not set,
                                   the current timestamp is used
