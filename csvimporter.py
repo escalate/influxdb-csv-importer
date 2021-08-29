@@ -39,6 +39,7 @@ class CsvImporter(object):
         self.cfg_password = None
         self.cfg_database = None
         self.cfg_measurement = None
+        self.cfg_tags_columns = None
         self.cfg_timestamp_column = None
         self.cfg_timestamp_format = None
         self.cfg_timestamp_timezone = None
@@ -77,6 +78,11 @@ class CsvImporter(object):
         """Sets the InfluxDB measurement"""
         self.cfg_measurement = measurement
         logging.debug('InfluxDB measurement is set to "' + self.cfg_measurement + '"')
+
+    def set_tags_columns(self, tags_columns):
+        """Sets columns in csv that should be tags"""
+        self.cfg_tags_columns = tags_columns.split(',')
+        logging.debug('Tags are set to "' + tags_columns + '"')
 
     def set_timestamp_column(self, column):
         """Sets the column to use as timestamp"""
@@ -233,10 +239,23 @@ class CsvImporter(object):
                 if row_copy is not None:
                     row_copy = CsvImporter.convert_int_to_float(row_copy)
 
+            tags = None
+            if self.cfg_tags_columns is not None:
+                tags = {}
+                for column in self.cfg_tags_columns:
+                    if row_copy and column in row_copy:
+                        if column == '' or row_copy[column] == '':
+                            del row_copy[column]
+                            continue
+                        else:
+                            tags[column] = row_copy[column]
+                            del row_copy[column]
+
             if row_copy is not None:
                 self.write_measurement(
                     self.cfg_measurement,
                     row_copy,
+                    tags=tags,
                     time=utc_timestamp)
 
 
@@ -260,6 +279,8 @@ class CsvImporter(object):
               help='Database name')
 @click.option('--measurement',
               help='Measurement name')
+@click.option('--tags-columns',
+              help='Columns that should be tags e.g. col1,col2,col3')
 @click.option('--timestamp-column',
               help='Name of the column to use as timestamp; \
               if option is not set, the current timestamp is used')
@@ -327,6 +348,8 @@ def cli(*args, **kwargs):
         csv_importer.set_database(kwargs['database'])
     if kwargs['measurement']:
         csv_importer.set_measurement(kwargs['measurement'])
+    if kwargs['tags_columns']:
+        csv_importer.set_tags_columns(kwargs['tags_columns'])
     if kwargs['timestamp_column']:
         csv_importer.set_timestamp_column(kwargs['timestamp_column'])
     if kwargs['timestamp_format']:
