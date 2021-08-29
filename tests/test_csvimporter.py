@@ -122,6 +122,15 @@ class TestClass(object):
         self.actual.set_measurement(expected)
         assert self.actual.cfg_measurement == expected
 
+    @pytest.mark.parametrize('tags_columns,expected', [
+        ('col1', ['col1']),
+        ('col1,col2', ['col1', 'col2']),
+        ('col1,col2,col3', ['col1', 'col2', 'col3']),
+    ])
+    def test_set_tags_columns(self, tags_columns, expected):
+        self.actual.set_tags_columns(tags_columns)
+        assert self.actual.cfg_tags_columns == expected
+
     def test_set_timestamp_column(self):
         expected = 'date_col1'
         self.actual.set_timestamp_column(expected)
