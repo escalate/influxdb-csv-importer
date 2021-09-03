@@ -16,5 +16,5 @@
     ```
 
 * Commit your changes using a descriptive commit message that follows the [AngularJS Commit Message Format](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).
-  Adherence to the commit message conventions is required, because release versions and release notes are automatically generated from these messages.
-* After the review process for new features and bugfixes is done, please squash multiple commits to a single one. Single commits make it easier to revert later in case of problems. 
+Adherence to the commit message conventions is required, because release versions and release notes are automatically generated from these messages.
+* After the review process for new features and bugfixes is done, please squash multiple commits to a single one. Single commits make it easier to revert later in case of problems.

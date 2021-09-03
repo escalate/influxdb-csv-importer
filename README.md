@@ -33,41 +33,41 @@ $ ./csvimporter.py --help
 
 Usage: csvimporter.py [OPTIONS] CSVFILE
 
-  Commandline interface for InfluxDB / CSV Importer
+    Commandline interface for InfluxDB / CSV Importer
 
 Options:
-  --delimiter TEXT                Delimiter of .csv file (Default: ,)
-  --server TEXT                   Server address (Default: localhost)
-  --port TEXT                     Server port (Default: 8086)
-  --user TEXT                     User for authentication
-  --password TEXT                 Pasword for authentication
-  --database TEXT                 Database name
-  --measurement TEXT              Measurement name
-  --tags-columns TEXT             Columns that should be tags
-                                  e.g. col1,col2,col3
-  --timestamp-column TEXT         Name of the column to use as timestamp;
-                                  if option is not set,
-                                  the current timestamp is used
-  --timestamp-format [epoch|datetime]
-                                  Format of the timestamp column
-                                  used to parse all timestamp
-                                  (Default: epoch timestamp);
-                                  epoch = epoch / unix timestamp
-                                  datetime = normal date and/or time notation
-  --timestamp-timezone TEXT       Timezone of the timestamp column
-  --locale TEXT                   Locale for ctype, numeric and monetary
-                                  values e.g. de_DE.UTF-8
-  --date-filter TEXT              Select only rows with a specific date
-                                  in the timestamp column for import
-                                  e.g. 2020-01-01
-  --column-ignorelist TEXT        Ignore a list of columns for import
-                                  e.g. col1,col2,col3
-  --convert-int-to-float          Convert integer values to float
-  --print-columns                 Print all column names in pretty json format
-  --print-rows                    Print all rows in pretty json format
-  --write-data                    Write data into InfluxDB
-  --verbose                       Enable verbose logging output
-  --help                          Show this message and exit.
+    --delimiter TEXT                Delimiter of .csv file (Default: ,)
+    --server TEXT                   Server address (Default: localhost)
+    --port TEXT                     Server port (Default: 8086)
+    --user TEXT                     User for authentication
+    --password TEXT                 Pasword for authentication
+    --database TEXT                 Database name
+    --measurement TEXT              Measurement name
+    --tags-columns TEXT             Columns that should be tags
+                                    e.g. col1,col2,col3
+    --timestamp-column TEXT         Name of the column to use as timestamp;
+                                    if option is not set,
+                                    the current timestamp is used
+    --timestamp-format [epoch|datetime]
+                                    Format of the timestamp column
+                                    used to parse all timestamp
+                                    (Default: epoch timestamp);
+                                    epoch = epoch / unix timestamp
+                                    datetime = normal date and/or time notation
+    --timestamp-timezone TEXT       Timezone of the timestamp column
+    --locale TEXT                   Locale for ctype, numeric and monetary
+                                    values e.g. de_DE.UTF-8
+    --date-filter TEXT              Select only rows with a specific date
+                                    in the timestamp column for import
+                                    e.g. 2020-01-01
+    --column-ignorelist TEXT        Ignore a list of columns for import
+                                    e.g. col1,col2,col3
+    --convert-int-to-float          Convert integer values to float
+    --print-columns                 Print all column names in pretty json format
+    --print-rows                    Print all rows in pretty json format
+    --write-data                    Write data into InfluxDB
+    --verbose                       Enable verbose logging output
+    --help                          Show this message and exit.
 ```
 
 ## Docker
@@ -85,7 +85,7 @@ $ docker run \
 
 Usage: csvimporter.py [OPTIONS] CSVFILE
 
-  Commandline interface for CsvImporter
+    Commandline interface for CsvImporter
 
 Options:
 ...

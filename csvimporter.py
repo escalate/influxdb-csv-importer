@@ -223,7 +223,7 @@ class CsvImporter(object):
 
             row_copy = row.copy()
             if self.cfg_date_filter is not None and \
-               self.cfg_timestamp_column is not None:
+                    self.cfg_timestamp_column is not None:
                 match = CsvImporter.match_date(
                     row[self.cfg_timestamp_column],
                     self.cfg_date_filter)
@@ -262,66 +262,108 @@ class CsvImporter(object):
 @click.command()
 @click.argument('csvfile',
                 type=click.Path(exists=True))
-@click.option('--delimiter',
-              default=',',
-              help='Delimiter of .csv file (Default: ,)')
-@click.option('--server',
-              default='localhost',
-              help='Server address (Default: localhost)')
-@click.option('--port',
-              default='8086',
-              help='Server port (Default: 8086)')
-@click.option('--user',
-              help='User for authentication')
-@click.option('--password',
-              help='Pasword for authentication')
-@click.option('--database',
-              help='Database name')
-@click.option('--measurement',
-              help='Measurement name')
-@click.option('--tags-columns',
-              help='Columns that should be tags e.g. col1,col2,col3')
-@click.option('--timestamp-column',
-              help='Name of the column to use as timestamp; \
-              if option is not set, the current timestamp is used')
-@click.option('--timestamp-format',
-              default='epoch',
-              type=click.Choice(['epoch', 'datetime']),
-              help='Format of the timestamp column \
-              used to parse all timestamp \
-              \b \
-              (Default: epoch timestamp); \
-              epoch = epoch / unix timestamp \
-              datetime = normal date and/or time notation')
-@click.option('--timestamp-timezone',
-              default='UTC',
-              help='Timezone of the timestamp column')
-@click.option('--locale',
-              help='Locale for ctype, numeric and monetary \
-              values \
-              e.g. de_DE.UTF-8')
-@click.option('--date-filter',
-              help='Select only rows with a specific date \
-              in the timestamp column for import e.g. 2020-01-01')
-@click.option('--column-ignorelist',
-              help='Ignore a list of columns for import \
-              e.g. col1,col2,col3')
-@click.option('--convert-int-to-float',
-              is_flag=True,
-              default=True,
-              help='Convert integer values to float')
-@click.option('--print-columns',
-              is_flag=True,
-              help='Print all column names in pretty json format')
-@click.option('--print-rows',
-              is_flag=True,
-              help='Print all rows in pretty json format')
-@click.option('--write-data',
-              is_flag=True,
-              help='Write data into InfluxDB')
-@click.option('--verbose',
-              is_flag=True,
-              help='Enable verbose logging output')
+@click.option(
+    '--delimiter',
+    default=',',
+    help='Delimiter of .csv file (Default: ,)'
+)
+@click.option(
+    '--server',
+    default='localhost',
+    help='Server address (Default: localhost)'
+)
+@click.option(
+    '--port',
+    default='8086',
+    help='Server port (Default: 8086)'
+)
+@click.option(
+    '--user',
+    help='User for authentication'
+)
+@click.option(
+    '--password',
+    help='Pasword for authentication'
+)
+@click.option(
+    '--database',
+    help='Database name'
+)
+@click.option(
+    '--measurement',
+    help='Measurement name'
+)
+@click.option(
+    '--tags-columns',
+    help='Columns that should be tags \
+        \b \
+        e.g. col1,col2,col3'
+)
+@click.option(
+    '--timestamp-column',
+    help='Name of the column to use as timestamp; \
+        if option is not set, the current timestamp is used'
+)
+@click.option(
+    '--timestamp-format',
+    default='epoch',
+    type=click.Choice(['epoch', 'datetime']),
+    help='Format of the timestamp column used \
+        to parse all timestamp \
+        \b \
+        (Default: epoch timestamp); \
+        \b \
+        epoch = epoch / unix timestamp \
+        \b \
+        datetime = normal date and/or time notation'
+)
+@click.option(
+    '--timestamp-timezone',
+    default='UTC',
+    help='Timezone of the timestamp column'
+)
+@click.option(
+    '--locale',
+    help='Locale for ctype, numeric and monetary \
+        values e.g. de_DE.UTF-8'
+)
+@click.option(
+    '--date-filter',
+    help='Select only rows with a specific date \
+        in the timestamp column for import \
+        e.g. 2020-01-01'
+)
+@click.option(
+    '--column-ignorelist',
+    help='Ignore a list of columns for import \
+        e.g. col1,col2,col3'
+)
+@click.option(
+    '--convert-int-to-float',
+    is_flag=True,
+    default=True,
+    help='Convert integer values to float'
+)
+@click.option(
+    '--print-columns',
+    is_flag=True,
+    help='Print all column names in pretty json format'
+)
+@click.option(
+    '--print-rows',
+    is_flag=True,
+    help='Print all rows in pretty json format'
+)
+@click.option(
+    '--write-data',
+    is_flag=True,
+    help='Write data into InfluxDB'
+)
+@click.option(
+    '--verbose',
+    is_flag=True,
+    help='Enable verbose logging output'
+)
 def cli(*args, **kwargs):
     """Commandline interface for InfluxDB / CSV Importer"""
 
