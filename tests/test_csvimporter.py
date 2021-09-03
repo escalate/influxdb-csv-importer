@@ -156,7 +156,7 @@ class TestClass(object):
         assert self.actual.cfg_timestamp_timezone == expected
 
     @pytest.mark.parametrize('lc', [
-        'en_US.UTF-8',
+        'de_DE.UTF-8',
         'en_GB.UTF-8'
     ])
     def test_set_locale(self, lc):
