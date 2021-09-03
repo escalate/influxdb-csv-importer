@@ -1,5 +1,6 @@
+[![Test](https://github.com/escalate/influxdb-csv-importer/actions/workflows/test.yml/badge.svg?branch=master&event=push)](https://github.com/escalate/influxdb-csv-importer/actions/workflows/test.yml)
+
 # InfluxDB CSV Importer
-[![Build Status](https://travis-ci.org/escalate/influxdb-csv-importer.svg?branch=master)](https://travis-ci.org/escalate/influxdb-csv-importer)
 
 Import CSV files into InfluxDB v1.x
 
