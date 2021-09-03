@@ -115,7 +115,7 @@ $ ./usevenv.sh csvimporter.py
 
 ## Other Projects
 * A commandline tool to convert a CSV file into InfluxDB-compatible JSON written in Ruby [spuder/csv2influxdb](https://github.com/spuder/csv2influxdb)
-* A commandline tool to import CSV files into InfluxDB written in GO [jpillora/csv-to-influxdb](https://github.com/jpillora/csv-to-influxdb)
+* A commandline tool to import CSV files into InfluxDB written in Golang [jpillora/csv-to-influxdb](https://github.com/jpillora/csv-to-influxdb)
 * Another commandline tool to import CSV files into InfluxDB but written in NodeJS [corpglory/csv2influx](https://github.com/CorpGlory/csv2influx)
 
 ## Contribute
