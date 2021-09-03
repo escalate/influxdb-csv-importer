@@ -1,8 +1,16 @@
 SHELL = /bin/bash -eo pipefail
 
-.PHONY: install-python-dependencies
-install-python-dependencies:
-	python -m pip install --disable-pip-version-check --requirement dev-requirements.txt
+.PHONY: venv
+venv: clean
+	python3 -m venv venv
+
+.PHONY: requirements
+requirements:
+	pip install --upgrade --requirement requirements.txt
+
+.PHONY: dev-requirements
+dev-requirements: requirements
+	pip install --upgrade --requirement dev-requirements.txt
 
 .PHONY: lint-editorconfig
 lint-editorconfig:
@@ -12,13 +20,14 @@ lint-editorconfig:
 lint-dockerfile:
 	find $(PWD) -name Dockerfile* -print0 | xargs -0 -I % hadolint %
 
-.PHONY: lint-all
-lint-all: | lint-editorconfig lint-dockerfile
+.PHONY: lint
+lint: | lint-editorconfig lint-dockerfile
 
-.PHONY: clean-python
-clean-python:
-	find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
-
-.PHONY: test-python
-test-python:
+.PHONY: test
+test:
 	tox
+
+.PHONY: clean
+clean:
+	rm -rf venv/
+	py3clean .
