@@ -15,9 +15,27 @@ jobs:
         with:
           python-version: '3.6'
 
+      - name: Install editorconfig-checker
+        run: |
+          gh release download --pattern "*linux-amd64.tar.gz" --dir /tmp
+          tar xvzf /tmp/ec-linux-amd64.tar.gz -C /tmp
+          chmod +x /tmp/bin/ec-linux-amd64
+          mv /tmp/bin/ec-linux-amd64 /usr/local/bin/ec
+        env:
+          GH_REPO: editorconfig-checker/editorconfig-checker
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Install hadolint
+        run: |
+          gh release download --pattern "*Linux-x86_64" --dir /usr/local/bin
+          chmod +x /usr/local/bin/hadolint-Linux-x86_64
+          ln --symbolic /usr/local/bin/hadolint-Linux-x86_64 /usr/local/bin/hadolint
+        env:
+          GH_REPO: hadolint/hadolint
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       - name: Install test dependencies
         run: |
-          python -m pip install --disable-pip-version-check editorconfig-checker
           make dev-requirements
           sudo locale-gen de_DE.UTF-8
           sudo locale-gen en_GB.UTF-8
@@ -26,5 +44,5 @@ jobs:
 
       - name: Run tox
         run: |
-          make lint-editorconfig
+          make lint
           make test
