@@ -7,8 +7,9 @@ from datetime import datetime
 from tempfile import NamedTemporaryFile
 
 import pytest
-from csvimporter import CsvImporter
 from pytz import timezone
+
+from csvimporter import CsvImporter
 
 FIXTURES_DIR = os.path.abspath('tests/fixtures')
 
