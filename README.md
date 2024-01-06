@@ -5,30 +5,36 @@
 Import CSV files into InfluxDB v1.x
 
 ## Installation
-Tested with Python 3.6.x on Ubuntu 18.04
 
-If you encounter issues with 3.6.x patch versions of Python, please open a Github issue.
+Tested with Python 3.12.x on Ubuntu 22.04
+
+If you encounter issues with 3.12.x patch versions of Python, please open a Github issue.
 
 ### Requirements
+
 Install needed requirements via pip
 
 #### Production
+
 ```
 $ pip install -r requirements.txt
 ```
 
 #### Development
+
 ```
 $ pip install -r dev-requirements.txt
 ```
 
 ### Run
+
 Run tool from commandline
 ```
 $ ./csvimporter.py
 ```
 
 ## Usage
+
 ```
 $ ./csvimporter.py --help
 
@@ -72,6 +78,7 @@ Options:
 ```
 
 ## Docker
+
 Build Docker image
 ```
 $ docker build \
@@ -102,6 +109,7 @@ $ docker run \
 ```
 
 ## Dependencies
+
 * [click](https://pypi.python.org/pypi/click)
 * [influxdb](https://pypi.python.org/pypi/influxdb)
 * [python-dateutil](https://pypi.python.org/pypi/python-dateutil)
@@ -114,12 +122,15 @@ $ ./usevenv.sh csvimporter.py
 ```
 
 ## Other Projects
+
 * A commandline tool to convert a CSV file into InfluxDB-compatible JSON written in Ruby [spuder/csv2influxdb](https://github.com/spuder/csv2influxdb)
 * A commandline tool to import CSV files into InfluxDB written in Golang [jpillora/csv-to-influxdb](https://github.com/jpillora/csv-to-influxdb)
 * Another commandline tool to import CSV files into InfluxDB but written in NodeJS [corpglory/csv2influx](https://github.com/CorpGlory/csv2influx)
 
 ## Contribute
+
 Please note the separate [contributing guide](https://github.com/escalate/influxdb-csv-importer/blob/master/CONTRIBUTING.md).
 
 ## License
+
 MIT
