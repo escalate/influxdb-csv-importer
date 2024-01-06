@@ -115,12 +115,6 @@ $ docker run \
 * [python-dateutil](https://pypi.python.org/pypi/python-dateutil)
 * [pytz](https://pypi.python.org/pypi/pytz)
 
-## Helper
-Small bash script to run python script within virtualenv
-```
-$ ./usevenv.sh csvimporter.py
-```
-
 ## Other Projects
 
 * A commandline tool to convert a CSV file into InfluxDB-compatible JSON written in Ruby [spuder/csv2influxdb](https://github.com/spuder/csv2influxdb)
