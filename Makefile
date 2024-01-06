@@ -8,8 +8,15 @@ venv: clean
 requirements:
 	pip install --upgrade --requirement requirements.txt
 
+.PHONY: locales
+locales:
+	sudo locale-gen de_DE.UTF-8
+	sudo locale-gen en_GB.UTF-8
+	sudo update-locale
+	locale --all-locales
+
 .PHONY: dev-requirements
-dev-requirements: requirements
+dev-requirements: requirements locales
 	pip install --upgrade --requirement dev-requirements.txt
 
 .PHONY: lint-editorconfig
