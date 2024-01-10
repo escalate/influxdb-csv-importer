@@ -149,6 +149,12 @@ jobs:
         with:
           files: "**/*.yml"
 
+      - name: Set up Python 3.x
+        if: steps.check_yaml.outputs.files_exists == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
       - name: Install yamllint
         if: steps.check_yaml.outputs.files_exists == 'true'
         run: |
@@ -171,6 +177,12 @@ jobs:
         uses: andstor/file-existence-action@v2
         with:
           files: "**/*.py"
+
+      - name: Set up Python 3.x
+        if: steps.check_python.outputs.files_exists == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
       - name: Install flake8
         if: steps.check_python.outputs.files_exists == 'true'
