@@ -1,4 +1,5 @@
-SHELL = /bin/bash -eo pipefail
+SHELL = /bin/bash
+.SHELLFLAGS = -e -o pipefail -c
 
 .PHONY: venv
 venv: clean
