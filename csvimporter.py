@@ -35,6 +35,7 @@ class CsvImporter(object):
         # Declare variables
         self.cfg_server = None
         self.cfg_port = None
+        self.cfg_ssl = None
         self.cfg_user = None
         self.cfg_password = None
         self.cfg_database = None
@@ -58,6 +59,11 @@ class CsvImporter(object):
         """Sets the InfluxDB server port"""
         self.cfg_port = port
         logging.debug('InfluxDB sever port is set to "' + self.cfg_port + '"')
+
+    def set_ssl(self, toggle):
+        """Sets toggle for ssl"""
+        self.cfg_ssl = toggle
+        logging.debug('Toggle for ssl is set to "' + str(self.cfg_ssl) + '"')
 
     def set_user(self, user):
         """Sets the InfluxDB user for authentication"""
@@ -155,15 +161,19 @@ class CsvImporter(object):
             return False
 
     @staticmethod
-    def convert_int_to_float(data):
+    def convert_int_to_float(data, tags_columns: list):
         """Returns a dictionary where all integer values
         are converted to float"""
         if data is not None:
             for key, value in data.items():
-                try:
-                    data[key] = float(locale.atof(value))
-                except ValueError as exception:
-                    logging.warning(exception)
+                if key not in tags_columns:
+                    if value:
+                        try:
+                            data[key] = float(locale.atof(value))
+                        except ValueError as exception:
+                            logging.warning(exception)
+                    else:
+                        data[key] = None
         return data
 
     @staticmethod
@@ -172,7 +182,9 @@ class CsvImporter(object):
         because InfluxDB only works internally with UTC timestamps"""
         datetime_tz = timezone('UTC').localize(datetime.utcfromtimestamp(0))
 
-        if fmt == 'epoch':
+        if fmt == 'raw':
+            return int(date_str)
+        elif fmt == 'epoch':
             datetime_naive = datetime.utcfromtimestamp(int(date_str))
             datetime_tz = timezone('UTC').localize(datetime_naive)
         elif fmt == 'datetime':
@@ -195,10 +207,12 @@ class CsvImporter(object):
         if tags is not None:
             json_body[0]['tags'] = tags
         if time is not None:
-            json_body[0]['time'] = time.strftime("%Y-%m-%dT%H:%M:%SZ")
+            json_body[0]['time'] = time.strftime("%Y-%m-%dT%H:%M:%SZ") if isinstance(time, str) else time
         try:
             logging.debug(json_body)
             self.influxdb_connection.write_points(json_body)
+            if logging.getLogger().getEffectiveLevel() == logging.WARNING:
+                print(".", end='', flush=True)
         except Exception as exception:
             logging.error(exception)
             raise
@@ -211,8 +225,11 @@ class CsvImporter(object):
             self.cfg_port,
             self.cfg_user,
             self.cfg_password,
-            self.cfg_database)
+            self.cfg_database,
+            ssl=self.cfg_ssl,
+            verify_ssl=self.cfg_ssl)
 
+        measurements_count = 0
         for row in self.csv_rows:
             utc_timestamp = None
             if self.cfg_timestamp_column is not None:
@@ -237,7 +254,7 @@ class CsvImporter(object):
 
             if self.cfg_convert_int_to_float is True:
                 if row_copy is not None:
-                    row_copy = CsvImporter.convert_int_to_float(row_copy)
+                    row_copy = CsvImporter.convert_int_to_float(row_copy, self.cfg_tags_columns)
 
             tags = None
             if self.cfg_tags_columns is not None:
@@ -257,6 +274,9 @@ class CsvImporter(object):
                     row_copy,
                     tags=tags,
                     time=utc_timestamp)
+                measurements_count += 1
+        
+        print(f"\nWrote {measurements_count} measurements to InfluxDB")
 
 
 @click.command()
@@ -276,6 +296,12 @@ class CsvImporter(object):
     '--port',
     default='8086',
     help='Server port (Default: 8086)'
+)
+@click.option(
+    '--ssl',
+    is_flag=True,
+    default=False,
+    help='Use ssl for connection to InfluxDB',
 )
 @click.option(
     '--user',
@@ -307,7 +333,7 @@ class CsvImporter(object):
 @click.option(
     '--timestamp-format',
     default='epoch',
-    type=click.Choice(['epoch', 'datetime']),
+    type=click.Choice(['epoch', 'datetime', 'raw']),
     help='Format of the timestamp column used \
         to parse all timestamp \
         \b \
@@ -315,7 +341,8 @@ class CsvImporter(object):
         \b \
         epoch = epoch / unix timestamp \
         \b \
-        datetime = normal date and/or time notation'
+        datetime = normal date and/or time notation \
+        raw = raw epoch timestamp, do not convert'
 )
 @click.option(
     '--timestamp-timezone',
@@ -382,6 +409,8 @@ def cli(*args, **kwargs):
         csv_importer.set_server(kwargs['server'])
     if kwargs['port']:
         csv_importer.set_port(kwargs['port'])
+    if kwargs['ssl']:
+        csv_importer.set_ssl(kwargs['ssl'])
     if kwargs['user']:
         csv_importer.set_user(kwargs['user'])
     if kwargs['password']:
