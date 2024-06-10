@@ -40,27 +40,29 @@ $ ./csvimporter.py --help
 
 Usage: csvimporter.py [OPTIONS] CSVFILE
 
-    Commandline interface for InfluxDB / CSV Importer
+  Commandline interface for InfluxDB / CSV Importer
 
 Options:
     --delimiter TEXT                Delimiter of .csv file (Default: ,)
     --server TEXT                   Server address (Default: localhost)
     --port TEXT                     Server port (Default: 8086)
+    --ssl                           Use ssl for connection to InfluxDB
     --user TEXT                     User for authentication
     --password TEXT                 Pasword for authentication
     --database TEXT                 Database name
     --measurement TEXT              Measurement name
-    --tags-columns TEXT             Columns that should be tags
+    --tags-columns TEXT             Columns that should be tags         
                                     e.g. col1,col2,col3
     --timestamp-column TEXT         Name of the column to use as timestamp;
-                                    if option is not set,
-                                    the current timestamp is used
-    --timestamp-format [epoch|datetime]
-                                    Format of the timestamp column
-                                    used to parse all timestamp
-                                    (Default: epoch timestamp);
-                                    epoch = epoch / unix timestamp
+                                    if option is not set, the current timestamp
+                                    is used
+    --timestamp-format [epoch|datetime|raw]
+                                    Format of the timestamp column used
+                                    to parse all timestamp         
+                                    (Default: epoch timestamp);         
+                                    epoch = epoch / unix timestamp         
                                     datetime = normal date and/or time notation
+                                    raw = raw epoch timestamp, do not convert
     --timestamp-timezone TEXT       Timezone of the timestamp column
     --locale TEXT                   Locale for ctype, numeric and monetary
                                     values e.g. de_DE.UTF-8
