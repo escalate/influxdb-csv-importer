@@ -275,7 +275,7 @@ class CsvImporter(object):
                     tags=tags,
                     time=utc_timestamp)
                 measurements_count += 1
-        
+
         print(f"\nWrote {measurements_count} measurements to InfluxDB")
 
 
