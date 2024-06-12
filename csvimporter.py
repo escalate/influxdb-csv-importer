@@ -161,12 +161,12 @@ class CsvImporter(object):
             return False
 
     @staticmethod
-    def convert_int_to_float(data, tags_columns: list):
+    def convert_int_to_float(data, tags_columns=None):
         """Returns a dictionary where all integer values
         are converted to float"""
         if data is not None:
             for key, value in data.items():
-                if key not in tags_columns:
+                if not tags_columns or key not in tags_columns:
                     if value:
                         try:
                             data[key] = float(locale.atof(value))
