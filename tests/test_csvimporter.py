@@ -51,6 +51,8 @@ def test_match_date_negativ(epoch_timestamp, date_str):
         datetime(2016, 9, 2, 8, 0, 11, tzinfo=timezone('UTC'))),
     ('1472803211', 'epoch', 'Europe/Berlin',
         datetime(2016, 9, 2, 8, 0, 11, tzinfo=timezone('UTC'))),
+    # Raw
+    ('1718109826000000000', 'raw', 'UTC', 1718109826000000000),
     # Unsupported format
     ('1472803211', 'foobar', 'UTC',
         datetime(1970, 1, 1, 0, 0, 0, tzinfo=timezone('UTC')))
@@ -59,20 +61,24 @@ def test_convert_into_utc_timestamp(date_str, fmt, tz, expected):
     assert CsvImporter.convert_into_utc_timestamp(date_str, fmt, tz) == expected
 
 
-@pytest.mark.parametrize('data,expected', [
-    ({'positiv_integer': '1'}, {'positiv_integer': 1.0}),
-    ({'negativ_integer': '-1'}, {'negativ_integer': -1.0}),
-    ({'positiv_float': '1.0'}, {'positiv_float': 1.0}),
-    ({'negativ_float': '-1.0'}, {'negativ_float': -1.0}),
-    ({'string': 'one'}, {'string': 'one'}),
-    ({'datetime': '2017-01-01 16:30'}, {'datetime': '2017-01-01 16:30'}),
-    ({'date': '2017-01-01'}, {'date': '2017-01-01'}),
-    ({'date_german': '01.01.2017'}, {'date_german': '01.01.2017'}),
-    ({'time': '16:30'}, {'time': '16:30'}),
-    (None, None)
+@pytest.mark.parametrize('data,expected,tags_columns', [
+    # Without tags_columns
+    ({'positiv_integer': '1'}, {'positiv_integer': 1.0}, None),
+    ({'negativ_integer': '-1'}, {'negativ_integer': -1.0}, None),
+    ({'positiv_float': '1.0'}, {'positiv_float': 1.0}, None),
+    ({'negativ_float': '-1.0'}, {'negativ_float': -1.0}, None),
+    ({'string': 'one'}, {'string': 'one'}, None),
+    ({'datetime': '2017-01-01 16:30'}, {'datetime': '2017-01-01 16:30'}, None),
+    ({'date': '2017-01-01'}, {'date': '2017-01-01'}, None),
+    ({'date_german': '01.01.2017'}, {'date_german': '01.01.2017'}, None),
+    ({'time': '16:30'}, {'time': '16:30'}, None),
+    (None, None, None),
+    # With tags_columns
+    ({'positiv_integer': '1'}, {'positiv_integer': 1.0}, ['tag1']),
+    ({'tag1': 'xyz'}, {'tag1': 'xyz'}, ['tag1'])
 ])
-def test_convert_int_to_float(data, expected):
-    assert CsvImporter.convert_int_to_float(data) == expected
+def test_convert_int_to_float(data, expected, tags_columns):
+    assert CsvImporter.convert_int_to_float(data, tags_columns) == expected
 
 
 class TestClass(object):
