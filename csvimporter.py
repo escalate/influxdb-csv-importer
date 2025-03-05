@@ -20,15 +20,13 @@ class CsvImporter(object):
     """Class to read .csv files
     and write the values to InfluxDB"""
 
-    def __init__(self, csv_filename, delimiter=','):
+    def __init__(self, csv_filename, delimiter=","):
         """Constructor"""
         logging.debug('CSV filename is set to "' + csv_filename + '"')
         logging.debug('CSV delimter is set to "' + delimiter + '"')
         self.csv_rows = []
-        with open(csv_filename, 'r') as csv_file:
-            csv_dict_reader = csv.DictReader(
-                csv_file,
-                delimiter=delimiter)
+        with open(csv_filename, "r") as csv_file:
+            csv_dict_reader = csv.DictReader(csv_file, delimiter=delimiter)
             for row in csv_dict_reader:
                 self.csv_rows.append(row.copy())
 
@@ -53,85 +51,139 @@ class CsvImporter(object):
     def set_server(self, server):
         """Sets the InfluxDB server address"""
         self.cfg_server = server
-        logging.debug('InfluxDB sever address is set to "' + self.cfg_server + '"')
+        logging.debug(
+            'InfluxDB sever address is set to "{server}"'.format(server=self.cfg_server)
+        )
 
     def set_port(self, port):
         """Sets the InfluxDB server port"""
         self.cfg_port = port
-        logging.debug('InfluxDB sever port is set to "' + self.cfg_port + '"')
+        logging.debug(
+            'InfluxDB sever port is set to "{port}"'.format(port=self.cfg_port)
+        )
 
     def set_ssl(self, toggle):
         """Sets toggle for ssl"""
         self.cfg_ssl = toggle
-        logging.debug('Toggle for ssl is set to "' + str(self.cfg_ssl) + '"')
+        logging.debug('Toggle for ssl is set to "{ssl}"'.format(ssl=str(self.cfg_ssl)))
 
     def set_user(self, user):
         """Sets the InfluxDB user for authentication"""
         self.cfg_user = user
-        logging.debug('InfluxDB user is set to "' + self.cfg_user + '"')
+        logging.debug('InfluxDB user is set to "{user}"'.format(user=self.cfg_user))
 
     def set_password(self, password):
         """Sets the InfluxDB password for authentication"""
         self.cfg_password = password
-        logging.debug('InfluxDB password is set to "' + self.cfg_password + '"')
+        logging.debug(
+            'InfluxDB password is set to "{password}"'.format(
+                password=self.cfg_password
+            )
+        )
 
     def set_database(self, database):
         """Sets the InfluxDB database"""
         self.cfg_database = database
-        logging.debug('InfluxDB database is set to "' + self.cfg_database + '"')
+        logging.debug(
+            'InfluxDB database is set to "{database}"'.format(
+                database=self.cfg_database
+            )
+        )
 
     def set_measurement(self, measurement):
         """Sets the InfluxDB measurement"""
         self.cfg_measurement = measurement
-        logging.debug('InfluxDB measurement is set to "' + self.cfg_measurement + '"')
+        logging.debug(
+            'InfluxDB measurement is set to "{measurement}"'.format(
+                measurement=self.cfg_measurement
+            )
+        )
 
     def set_tags_columns(self, tags_columns):
         """Sets columns in csv that should be tags"""
-        self.cfg_tags_columns = tags_columns.split(',')
-        logging.debug('Tags are set to "' + tags_columns + '"')
+        self.cfg_tags_columns = tags_columns.split(",")
+        logging.debug(
+            'Tags are set to "{tags_columns}"'.format(tags_columns=tags_columns)
+        )
 
     def set_timestamp_column(self, column):
         """Sets the column to use as timestamp"""
         self.cfg_timestamp_column = column
-        logging.debug('Timestamp column is set to "' + self.cfg_timestamp_column + '"')
+        logging.debug(
+            'Timestamp column is set to "{timestamp_column}"'.format(
+                timestamp_column=self.cfg_timestamp_column
+            )
+        )
 
     def set_timestamp_format(self, fmt):
         """Sets the format of the timestamp column"""
         self.cfg_timestamp_format = fmt
-        logging.debug('Timestamp format is set to "' + self.cfg_timestamp_format + '"')
+        logging.debug(
+            'Timestamp format is set to "{timestamp_format}"'.format(
+                timestamp_format=self.cfg_timestamp_format
+            )
+        )
 
     def set_timestamp_timezone(self, tz):
         """Sets the timezone of the timestamp column"""
         self.cfg_timestamp_timezone = tz
-        logging.debug('Timestamp timezone is set to "' + self.cfg_timestamp_timezone + '"')
+        logging.debug(
+            'Timestamp timezone is set to "{timezone}"'.format(
+                timezone=self.cfg_timestamp_timezone
+            )
+        )
 
     def set_locale(self, lc):
         """Sets the locale for ctype, numeric and monetary values"""
         self.cfg_locale = lc
         locale.setlocale(locale.LC_CTYPE, self.cfg_locale)
-        logging.debug('Locale for ctype values is set to "' + str(locale.getlocale(locale.LC_CTYPE)) + '"')
+        logging.debug(
+            'Locale for ctype values is set to "{ctype}"'.format(
+                ctype=str(locale.getlocale(locale.LC_CTYPE))
+            )
+        )
         locale.setlocale(locale.LC_NUMERIC, self.cfg_locale)
-        logging.debug('Locale for numeric values is set to "' + str(locale.getlocale(locale.LC_NUMERIC)) + '"')
+        logging.debug(
+            'Locale for numeric values is set to "{numeric}"'.format(
+                numeric=str(locale.getlocale(locale.LC_NUMERIC))
+            )
+        )
         locale.setlocale(locale.LC_MONETARY, self.cfg_locale)
-        logging.debug('Locale for monetary values is set to "' + str(locale.getlocale(locale.LC_MONETARY)) + '"')
+        logging.debug(
+            'Locale for monetary values is set to "{monetary}"'.format(
+                monetary=str(locale.getlocale(locale.LC_MONETARY))
+            )
+        )
 
     def set_date_filter(self, date):
         """Sets the date for rows to filter"""
         self.cfg_date_filter = date
-        logging.debug('Date filter is set to "' + self.cfg_date_filter + '"')
+        logging.debug(
+            'Date filter is set to "{date_filter}"'.format(
+                date_filter=self.cfg_date_filter
+            )
+        )
 
     def set_column_ignorelist(self, columns):
         """Sets the list of columns to ignore"""
-        columns = columns.split(',')
-        columns = [x.strip(' ') for x in columns]
+        columns = columns.split(",")
+        columns = [x.strip(" ") for x in columns]
         columns = [x for x in columns if x]
         self.cfg_column_ignorelist = columns
-        logging.debug('Column ignorelist is set to ' + str(self.cfg_column_ignorelist))
+        logging.debug(
+            'Column ignorelist is set to "{column_ignorelist}"'.format(
+                column_ignorelist=str(self.cfg_column_ignorelist)
+            )
+        )
 
     def set_convert_int_to_float(self, toggle):
         """Sets toggle for integer to float conversion"""
         self.cfg_convert_int_to_float = toggle
-        logging.debug('Toggle for int to float conversion is set to "' + str(self.cfg_convert_int_to_float) + '"')
+        logging.debug(
+            'Toggle for int to float conversion is set to "{convert}"'.format(
+                convert=str(self.cfg_convert_int_to_float)
+            )
+        )
 
     def print_columns(self):
         """Returns all column names in pretty json format"""
@@ -149,11 +201,11 @@ class CsvImporter(object):
         return j
 
     @staticmethod
-    def match_date(epoch_timestamp, date_str='2020-01-01'):
+    def match_date(epoch_timestamp, date_str="2020-01-01"):
         """Returns true if timestamp is inside the range of date
         Returns false if timestamp is outside the range of date"""
         utc_timestamp = datetime.utcfromtimestamp(int(epoch_timestamp))
-        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
         date_nextday = date_obj + timedelta(days=1)
         if utc_timestamp >= date_obj and utc_timestamp < date_nextday:
             return True
@@ -180,46 +232,43 @@ class CsvImporter(object):
     def convert_into_utc_timestamp(date_str, fmt, tz):
         """Converts a datetime or epoch string into UTC timezone
         because InfluxDB only works internally with UTC timestamps"""
-        datetime_tz = timezone('UTC').localize(datetime.utcfromtimestamp(0))
+        datetime_tz = timezone("UTC").localize(datetime.utcfromtimestamp(0))
 
-        if fmt == 'raw':
+        if fmt == "raw":
             return int(date_str)
-        elif fmt == 'epoch':
+        elif fmt == "epoch":
             datetime_naive = datetime.utcfromtimestamp(int(date_str))
-            datetime_tz = timezone('UTC').localize(datetime_naive)
-        elif fmt == 'datetime':
+            datetime_tz = timezone("UTC").localize(datetime_naive)
+        elif fmt == "datetime":
             datetime_naive = parse(date_str)
             datetime_tz = timezone(tz).localize(datetime_naive)
         else:
-            logging.error('Time format is not supported')
+            logging.error("Time format is not supported")
 
-        datetime_utc = datetime_tz.astimezone(timezone('UTC'))
+        datetime_utc = datetime_tz.astimezone(timezone("UTC"))
         return datetime_utc
 
     def write_measurement(self, name, fields, tags=None, time=None):
         """Writes a single measurement to InfluxDB"""
-        json_body = [
-            {
-                'measurement': name,
-                'fields': fields
-            }
-        ]
+        json_body = [{"measurement": name, "fields": fields}]
         if tags is not None:
-            json_body[0]['tags'] = tags
+            json_body[0]["tags"] = tags
         if time is not None:
-            json_body[0]['time'] = time.strftime("%Y-%m-%dT%H:%M:%SZ") if isinstance(time, str) else time
+            json_body[0]["time"] = (
+                time.strftime("%Y-%m-%dT%H:%M:%SZ") if isinstance(time, str) else time
+            )
         try:
             logging.debug(json_body)
             self.influxdb_connection.write_points(json_body)
             if logging.getLogger().getEffectiveLevel() == logging.WARNING:
-                print(".", end='', flush=True)
+                print(".", end="", flush=True)
         except Exception as exception:
             logging.error(exception)
             raise
 
     def write_data(self):
         """Writes processed data to InfluxDB"""
-        logging.debug('Initialize InfluxDB connection')
+        logging.debug("Initialize InfluxDB connection")
         self.influxdb_connection = InfluxDBClient(
             self.cfg_server,
             self.cfg_port,
@@ -227,7 +276,8 @@ class CsvImporter(object):
             self.cfg_password,
             self.cfg_database,
             ssl=self.cfg_ssl,
-            verify_ssl=self.cfg_ssl)
+            verify_ssl=self.cfg_ssl,
+        )
 
         measurements_count = 0
         for row in self.csv_rows:
@@ -236,14 +286,17 @@ class CsvImporter(object):
                 utc_timestamp = CsvImporter.convert_into_utc_timestamp(
                     row[self.cfg_timestamp_column],
                     self.cfg_timestamp_format,
-                    self.cfg_timestamp_timezone)
+                    self.cfg_timestamp_timezone,
+                )
 
             row_copy = row.copy()
-            if self.cfg_date_filter is not None and \
-                    self.cfg_timestamp_column is not None:
+            if (
+                self.cfg_date_filter is not None
+                and self.cfg_timestamp_column is not None
+            ):
                 match = CsvImporter.match_date(
-                    row[self.cfg_timestamp_column],
-                    self.cfg_date_filter)
+                    row[self.cfg_timestamp_column], self.cfg_date_filter
+                )
                 if not match:
                     row_copy = None
 
@@ -254,14 +307,16 @@ class CsvImporter(object):
 
             if self.cfg_convert_int_to_float is True:
                 if row_copy is not None:
-                    row_copy = CsvImporter.convert_int_to_float(row_copy, self.cfg_tags_columns)
+                    row_copy = CsvImporter.convert_int_to_float(
+                        row_copy, self.cfg_tags_columns
+                    )
 
             tags = None
             if self.cfg_tags_columns is not None:
                 tags = {}
                 for column in self.cfg_tags_columns:
                     if row_copy and column in row_copy:
-                        if column == '' or row_copy[column] == '':
+                        if column == "" or row_copy[column] == "":
                             del row_copy[column]
                             continue
                         else:
@@ -270,71 +325,46 @@ class CsvImporter(object):
 
             if row_copy is not None:
                 self.write_measurement(
-                    self.cfg_measurement,
-                    row_copy,
-                    tags=tags,
-                    time=utc_timestamp)
+                    self.cfg_measurement, row_copy, tags=tags, time=utc_timestamp
+                )
                 measurements_count += 1
 
         print(f"\nWrote {measurements_count} measurements to InfluxDB")
 
 
 @click.command()
-@click.argument('csvfile',
-                type=click.Path(exists=True))
+@click.argument("csvfile", type=click.Path(exists=True))
+@click.option("--delimiter", default=",", help="Delimiter of .csv file (Default: ,)")
 @click.option(
-    '--delimiter',
-    default=',',
-    help='Delimiter of .csv file (Default: ,)'
+    "--server", default="localhost", help="Server address (Default: localhost)"
 )
+@click.option("--port", default="8086", help="Server port (Default: 8086)")
 @click.option(
-    '--server',
-    default='localhost',
-    help='Server address (Default: localhost)'
-)
-@click.option(
-    '--port',
-    default='8086',
-    help='Server port (Default: 8086)'
-)
-@click.option(
-    '--ssl',
+    "--ssl",
     is_flag=True,
     default=False,
-    help='Use ssl for connection to InfluxDB',
+    help="Use ssl for connection to InfluxDB",
 )
+@click.option("--user", help="User for authentication")
+@click.option("--password", help="Pasword for authentication")
+@click.option("--database", help="Database name")
+@click.option("--measurement", help="Measurement name")
 @click.option(
-    '--user',
-    help='User for authentication'
-)
-@click.option(
-    '--password',
-    help='Pasword for authentication'
-)
-@click.option(
-    '--database',
-    help='Database name'
-)
-@click.option(
-    '--measurement',
-    help='Measurement name'
-)
-@click.option(
-    '--tags-columns',
-    help='Columns that should be tags \
+    "--tags-columns",
+    help="Columns that should be tags \
         \b \
-        e.g. col1,col2,col3'
+        e.g. col1,col2,col3",
 )
 @click.option(
-    '--timestamp-column',
-    help='Name of the column to use as timestamp; \
-        if option is not set, the current timestamp is used'
+    "--timestamp-column",
+    help="Name of the column to use as timestamp; \
+        if option is not set, the current timestamp is used",
 )
 @click.option(
-    '--timestamp-format',
-    default='epoch',
-    type=click.Choice(['epoch', 'datetime', 'raw']),
-    help='Format of the timestamp column used \
+    "--timestamp-format",
+    default="epoch",
+    type=click.Choice(["epoch", "datetime", "raw"]),
+    help="Format of the timestamp column used \
         to parse all timestamp \
         \b \
         (Default: epoch timestamp); \
@@ -342,111 +372,95 @@ class CsvImporter(object):
         epoch = epoch / unix timestamp \
         \b \
         datetime = normal date and/or time notation \
-        raw = raw epoch timestamp, do not convert'
+        raw = raw epoch timestamp, do not convert",
 )
 @click.option(
-    '--timestamp-timezone',
-    default='UTC',
-    help='Timezone of the timestamp column'
+    "--timestamp-timezone", default="UTC", help="Timezone of the timestamp column"
 )
 @click.option(
-    '--locale',
-    help='Locale for ctype, numeric and monetary \
-        values e.g. de_DE.UTF-8'
+    "--locale",
+    help="Locale for ctype, numeric and monetary \
+        values e.g. de_DE.UTF-8",
 )
 @click.option(
-    '--date-filter',
-    help='Select only rows with a specific date \
+    "--date-filter",
+    help="Select only rows with a specific date \
         in the timestamp column for import \
-        e.g. 2020-01-01'
+        e.g. 2020-01-01",
 )
 @click.option(
-    '--column-ignorelist',
-    help='Ignore a list of columns for import \
-        e.g. col1,col2,col3'
+    "--column-ignorelist",
+    help="Ignore a list of columns for import \
+        e.g. col1,col2,col3",
 )
 @click.option(
-    '--convert-int-to-float',
+    "--convert-int-to-float",
     is_flag=True,
     default=True,
-    help='Convert integer values to float'
+    help="Convert integer values to float",
 )
 @click.option(
-    '--print-columns',
-    is_flag=True,
-    help='Print all column names in pretty json format'
+    "--print-columns", is_flag=True, help="Print all column names in pretty json format"
 )
-@click.option(
-    '--print-rows',
-    is_flag=True,
-    help='Print all rows in pretty json format'
-)
-@click.option(
-    '--write-data',
-    is_flag=True,
-    help='Write data into InfluxDB'
-)
-@click.option(
-    '--verbose',
-    is_flag=True,
-    help='Enable verbose logging output'
-)
+@click.option("--print-rows", is_flag=True, help="Print all rows in pretty json format")
+@click.option("--write-data", is_flag=True, help="Write data into InfluxDB")
+@click.option("--verbose", is_flag=True, help="Enable verbose logging output")
 def cli(*args, **kwargs):
     """Commandline interface for InfluxDB / CSV Importer"""
 
     # Configure logging
-    log_format = '%(levelname)s: %(message)s'
-    if kwargs['verbose']:
+    log_format = "%(levelname)s: %(message)s"
+    if kwargs["verbose"]:
         logging.basicConfig(format=log_format, level=logging.DEBUG)
     else:
         logging.basicConfig(format=log_format)
 
     # Instantiate CsvImporter
-    csv_importer = CsvImporter(kwargs['csvfile'], kwargs['delimiter'])
+    csv_importer = CsvImporter(kwargs["csvfile"], kwargs["delimiter"])
 
     # Handle options
-    if kwargs['server']:
-        csv_importer.set_server(kwargs['server'])
-    if kwargs['port']:
-        csv_importer.set_port(kwargs['port'])
-    if kwargs['ssl']:
-        csv_importer.set_ssl(kwargs['ssl'])
-    if kwargs['user']:
-        csv_importer.set_user(kwargs['user'])
-    if kwargs['password']:
-        csv_importer.set_password(kwargs['password'])
-    if kwargs['database']:
-        csv_importer.set_database(kwargs['database'])
-    if kwargs['measurement']:
-        csv_importer.set_measurement(kwargs['measurement'])
-    if kwargs['tags_columns']:
-        csv_importer.set_tags_columns(kwargs['tags_columns'])
-    if kwargs['timestamp_column']:
-        csv_importer.set_timestamp_column(kwargs['timestamp_column'])
-    if kwargs['timestamp_format']:
-        csv_importer.set_timestamp_format(kwargs['timestamp_format'])
-    if kwargs['timestamp_timezone']:
-        csv_importer.set_timestamp_timezone(kwargs['timestamp_timezone'])
-    if kwargs['locale']:
-        csv_importer.set_locale(kwargs['locale'])
-    if kwargs['date_filter']:
-        csv_importer.set_date_filter(kwargs['date_filter'])
-    if kwargs['column_ignorelist']:
-        csv_importer.set_column_ignorelist(kwargs['column_ignorelist'])
+    if kwargs["server"]:
+        csv_importer.set_server(kwargs["server"])
+    if kwargs["port"]:
+        csv_importer.set_port(kwargs["port"])
+    if kwargs["ssl"]:
+        csv_importer.set_ssl(kwargs["ssl"])
+    if kwargs["user"]:
+        csv_importer.set_user(kwargs["user"])
+    if kwargs["password"]:
+        csv_importer.set_password(kwargs["password"])
+    if kwargs["database"]:
+        csv_importer.set_database(kwargs["database"])
+    if kwargs["measurement"]:
+        csv_importer.set_measurement(kwargs["measurement"])
+    if kwargs["tags_columns"]:
+        csv_importer.set_tags_columns(kwargs["tags_columns"])
+    if kwargs["timestamp_column"]:
+        csv_importer.set_timestamp_column(kwargs["timestamp_column"])
+    if kwargs["timestamp_format"]:
+        csv_importer.set_timestamp_format(kwargs["timestamp_format"])
+    if kwargs["timestamp_timezone"]:
+        csv_importer.set_timestamp_timezone(kwargs["timestamp_timezone"])
+    if kwargs["locale"]:
+        csv_importer.set_locale(kwargs["locale"])
+    if kwargs["date_filter"]:
+        csv_importer.set_date_filter(kwargs["date_filter"])
+    if kwargs["column_ignorelist"]:
+        csv_importer.set_column_ignorelist(kwargs["column_ignorelist"])
 
     # Handle toggles
-    csv_importer.set_convert_int_to_float(kwargs['convert_int_to_float'])
+    csv_importer.set_convert_int_to_float(kwargs["convert_int_to_float"])
 
     # Handle actions
-    if kwargs['print_columns']:
+    if kwargs["print_columns"]:
         columns = csv_importer.print_columns()
         click.echo(columns)
-    if kwargs['print_rows']:
+    if kwargs["print_rows"]:
         rows = csv_importer.print_rows()
         click.echo(rows)
-    if kwargs['write_data']:
+    if kwargs["write_data"]:
         csv_importer.write_data()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cli()
