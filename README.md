@@ -29,6 +29,7 @@ $ pip install -r dev-requirements.txt
 ### Run
 
 Run tool from commandline
+
 ```
 $ ./csvimporter.py
 ```
@@ -82,6 +83,7 @@ Options:
 ## Docker
 
 Build Docker image
+
 ```
 $ docker build \
     --tag=csvimporter \
@@ -89,6 +91,7 @@ $ docker build \
 ```
 
 Run Docker container from built image to print help
+
 ```
 $ docker run \
     csvimporter
@@ -102,6 +105,7 @@ Options:
 ```
 
 Run Docker container from built image with additional arguments
+
 ```
 $ docker run \
     csvimporter \
@@ -112,16 +116,16 @@ $ docker run \
 
 ## Dependencies
 
-* [click](https://pypi.python.org/pypi/click)
-* [influxdb](https://pypi.python.org/pypi/influxdb)
-* [python-dateutil](https://pypi.python.org/pypi/python-dateutil)
-* [pytz](https://pypi.python.org/pypi/pytz)
+- [click](https://pypi.python.org/pypi/click)
+- [influxdb](https://pypi.python.org/pypi/influxdb)
+- [python-dateutil](https://pypi.python.org/pypi/python-dateutil)
+- [pytz](https://pypi.python.org/pypi/pytz)
 
 ## Other Projects
 
-* A commandline tool to convert a CSV file into InfluxDB-compatible JSON written in Ruby [spuder/csv2influxdb](https://github.com/spuder/csv2influxdb)
-* A commandline tool to import CSV files into InfluxDB written in Golang [jpillora/csv-to-influxdb](https://github.com/jpillora/csv-to-influxdb)
-* Another commandline tool to import CSV files into InfluxDB but written in NodeJS [corpglory/csv2influx](https://github.com/CorpGlory/csv2influx)
+- A commandline tool to convert a CSV file into InfluxDB-compatible JSON written in Ruby [spuder/csv2influxdb](https://github.com/spuder/csv2influxdb)
+- A commandline tool to import CSV files into InfluxDB written in Golang [jpillora/csv-to-influxdb](https://github.com/jpillora/csv-to-influxdb)
+- Another commandline tool to import CSV files into InfluxDB but written in NodeJS [corpglory/csv2influx](https://github.com/CorpGlory/csv2influx)
 
 ## Contribute
 
