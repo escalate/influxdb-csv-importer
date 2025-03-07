@@ -333,22 +333,47 @@ class CsvImporter(object):
 
 
 @click.command()
-@click.argument("csvfile", type=click.Path(exists=True))
-@click.option("--delimiter", default=",", help="Delimiter of .csv file (Default: ,)")
-@click.option(
-    "--server", default="localhost", help="Server address (Default: localhost)"
+@click.argument(
+    "csvfile",
+    type=click.Path(exists=True),
 )
-@click.option("--port", default="8086", help="Server port (Default: 8086)")
+@click.option(
+    "--delimiter",
+    default=",",
+    help="Delimiter of .csv file (Default: ,)",
+)
+@click.option(
+    "--server",
+    default="localhost",
+    help="Server address (Default: localhost)",
+)
+@click.option(
+    "--port",
+    default="8086",
+    help="Server port (Default: 8086)",
+)
 @click.option(
     "--ssl",
     is_flag=True,
     default=False,
     help="Use ssl for connection to InfluxDB",
 )
-@click.option("--user", help="User for authentication")
-@click.option("--password", help="Pasword for authentication")
-@click.option("--database", help="Database name")
-@click.option("--measurement", help="Measurement name")
+@click.option(
+    "--user",
+    help="User for authentication",
+)
+@click.option(
+    "--password",
+    help="Pasword for authentication",
+)
+@click.option(
+    "--database",
+    help="Database name",
+)
+@click.option(
+    "--measurement",
+    help="Measurement name",
+)
 @click.option(
     "--tags-columns",
     help="Columns that should be tags \
@@ -375,7 +400,9 @@ class CsvImporter(object):
         raw = raw epoch timestamp, do not convert",
 )
 @click.option(
-    "--timestamp-timezone", default="UTC", help="Timezone of the timestamp column"
+    "--timestamp-timezone",
+    default="UTC",
+    help="Timezone of the timestamp column",
 )
 @click.option(
     "--locale",
@@ -400,11 +427,25 @@ class CsvImporter(object):
     help="Convert integer values to float",
 )
 @click.option(
-    "--print-columns", is_flag=True, help="Print all column names in pretty json format"
+    "--print-columns",
+    is_flag=True,
+    help="Print all column names in pretty json format",
 )
-@click.option("--print-rows", is_flag=True, help="Print all rows in pretty json format")
-@click.option("--write-data", is_flag=True, help="Write data into InfluxDB")
-@click.option("--verbose", is_flag=True, help="Enable verbose logging output")
+@click.option(
+    "--print-rows",
+    is_flag=True,
+    help="Print all rows in pretty json format",
+)
+@click.option(
+    "--write-data",
+    is_flag=True,
+    help="Write data into InfluxDB",
+)
+@click.option(
+    "--verbose",
+    is_flag=True,
+    help="Enable verbose logging output",
+)
 def cli(*args, **kwargs):
     """Commandline interface for InfluxDB / CSV Importer"""
 
